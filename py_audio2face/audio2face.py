@@ -17,6 +17,25 @@ from py_audio2face.modules._export import _A2FExport
 from py_audio2face.modules._streaming import _A2F_streaming
 
 from py_audio2face import utils
+import socket
+
+
+
+def find_free_port(start_port=8011, max_attempts=10):
+    # default 8011 , then goes to 8008
+
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            if s.connect_ex(('localhost', port)) != 0:
+                return port
+            
+            else:
+
+                for i in range(max_attempts):
+                    port = start_port + i
+                
+                    if s.connect_ex(('localhost', port)) != 0:
+                        return port
+                raise RuntimeError("No free port found in range.")
 
 
 class Audio2Face(
@@ -29,7 +48,7 @@ class Audio2Face(
 ):
     def __init__(
             self,
-            api_url="http://localhost:8011",
+            api_url=None,
             a2f_install_path: str = None,
             output_dir: str = None
     ):
@@ -39,6 +58,11 @@ class Audio2Face(
         output_dir (str): Optional output directory for generated animations.
         """
         self.api_url = api_url
+
+        if self.api_url is None:
+            port = find_free_port()
+            api_url = f"http://localhost:{port}"
+
         if a2f_install_path is None:
             a2f_install_path = utils.get_audio2face_install_path()
             if a2f_install_path is None:
