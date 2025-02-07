@@ -42,6 +42,8 @@ class _A2F_HTTP_CLIENT:
         if status == "OK":
             print("audio2face running")
             return status
+        
+        print(self.a2f_install_path)
 
         print("starting audio2face headless")
         batch_file = f"{self.a2f_install_path}/audio2face_headless.bat"

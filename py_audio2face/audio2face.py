@@ -21,20 +21,27 @@ import socket
 
 
 
-def find_free_port(start_port=8011, max_attempts=10):
+def find_free_port(start_port=8008, max_attempts=10):
     # default 8011 , then goes to 8008
 
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-            if s.connect_ex(('localhost', port)) != 0:
-                return port
+            if s.connect_ex(('localhost', 8011)) != 0:
+                # default port
+                print("Connected to port 8011")
+                return 8011
             
             else:
+                print("Port 8011 not free, trying other ports...")
 
                 for i in range(max_attempts):
                     port = start_port + i
                 
                     if s.connect_ex(('localhost', port)) != 0:
+                        print(f"Initiated on port {port}")
                         return port
+                    
+                    else:
+                        print(f"Port {port} not free, trying other ports...")
                 raise RuntimeError("No free port found in range.")
 
 
@@ -61,7 +68,8 @@ class Audio2Face(
 
         if self.api_url is None:
             port = find_free_port()
-            api_url = f"http://localhost:{port}"
+            self.api_url = f"http://localhost:{port}"
+
 
         if a2f_install_path is None:
             a2f_install_path = utils.get_audio2face_install_path()
@@ -88,6 +96,8 @@ class Audio2Face(
         Sends the arkit_resolved mark_usd_file / streaming file to the audio2face server to initialize the scene.
         """
         mark_usd_file = utils.get_mark_usd_file_path(streaming)
+        print("Mark AR file path")
+        print(mark_usd_file)
         if self.loaded_scene == mark_usd_file:
             return
 
