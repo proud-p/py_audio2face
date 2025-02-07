@@ -1,0 +1,22 @@
+# Success only
+
+
+General A2F request body - need local mark_arkit file
+{
+  "file_name": "C:/Users/Avika/OneDrive - Hogarth Worldwide/Documents/CTA/coding-projects/py_audio2face/py_audio2face/assets/mark_arkit_solved_default.usd"
+}
+
+
+POST Player-SetRootPath - set sound files path
+
+{
+  "a2f_player": "/World/audio2face/Player",
+"dir_path" : "C:/Users/Avika/OneDrive - Hogarth Worldwide/Documents/CTA/coding-projects/py_audio2face/voices/output_riff.wav"
+}
+
+
+Export POST A2f/Exporter/ActivateStreamLiveLink
+{
+  "node_path": "/World/audio2face/StreamLivelink",
+  "value": true
+}

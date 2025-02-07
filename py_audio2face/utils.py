@@ -59,9 +59,19 @@ def get_audio2face_install_path():
 
 
 def get_mark_usd_file_path(streaming = False) -> str:
+    # this is so stupid but file path needs to be / and not \ otherwise won't work, previous code generates \ so editing
     if not streaming:
         usd_file_path = importlib_resources.files('py_audio2face') / 'assets' / 'mark_arkit_solved_default.usd'
+        
+
     else:
         usd_file_path = importlib_resources.files('py_audio2face') / 'assets' / 'mark_arkit_solved_streaming.usd'
+
+    if "\\" in str(usd_file_path):
+        print("Wrong file path format, needs to be / not \, editing")
+        usd_file_path = str(usd_file_path).replace("\\","/")
+        print(usd_file_path)
+
+
 
     return str(usd_file_path)

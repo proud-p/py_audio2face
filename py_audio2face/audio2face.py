@@ -121,7 +121,8 @@ class Audio2Face(
         return: the path of the output file
         """
         self.init_a2f()
-
+        print("audio file path for single a2f")
+        print(audio_file_path)
         self.set_root_path(audio_file_path)
         self.set_track(audio_file_path)
 
@@ -130,7 +131,7 @@ class Audio2Face(
     def audio2face_folder(self, input_folder: str, output_folder: str, fps: int = 60, emotion: bool = False) -> list:
         """
         Generate the face animations from all audio files in a folder.
-        input_folder (str): Path to the folder containing the audio files.
+        input_folder (str): Path to the folder containing the audio files. --> this now needs to change to the file itself
         output_folder (str): Path to the output folder for the animations.
         fps (int): Frames per second of the output animations.
         emotion_auto_detect (bool): Whether to generate emotion_auto_detect keys from the audio files.
