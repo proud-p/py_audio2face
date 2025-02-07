@@ -4,6 +4,10 @@
 </p>
   <h2 align="center" style="margin-top:-10px">Generate expressive facial animation from audio</h2>
 
+
+# Added
+- Port check upon init (starts with default 8011, then moves on to 8008, max retries 10
+
 # Overview
 
 This Python script leverages the [headless](https://docs.omniverse.nvidia.com/audio2face/latest/user-manual/rest-api.html) mode of [Audio2Face](https://www.nvidia.com/en-us/omniverse/apps/audio2face/) to generate animations for characters:
